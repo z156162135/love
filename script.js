@@ -25,7 +25,7 @@ const noTexts = [
 
     // 解码
     const decodedText = decodeURIComponent(atob(LoveName));
-    questionText.innerHTML = (decodedText != 'ée' ? decodedText : '') + "，可以成为我的恋人吗";
+    questionText.innerHTML = `${decodedText}，可以成为我的恋人吗`;
 })()
 
 // No 按钮点击事件
