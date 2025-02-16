@@ -7,21 +7,29 @@ let clickCount = 0;  // 记录点击 No 的次数
 
 // No 按钮的文字变化
 const noTexts = [
-    "？你认真的吗…", 
-    "要不再想想？", 
-    "不许选这个！ ", 
-    "我会很伤心…", 
+    "？你认真的吗…",
+    "要不再想想？",
+    "不许选这个！ ",
+    "我会很伤心…",
     "不行:("
 ];
 
-// 解码
-const params = new URLSearchParams(window.location.search);
-const LoveName = params.get('LoveName');
-const decodedText = decodeURIComponent(escape(atob(LoveName)));
-questionText.innerHTML = `${decodedText}可以成为我的恋人吗？`;
+(function () {
+    // 获取当前页面的 URL 查询参数
+    const params = new URLSearchParams(window.location.search);
+    // 获取指定的参数
+    const LoveName = params.get('LoveName');
+    if (!LoveName) {
+        return; // 如果没有传递参数，则不执行后续代码
+    }
+
+    // 解码
+    const decodedText = decodeURIComponent(atob(LoveName));
+    questionText.innerHTML = (decodedText != 'ée' ? decodedText : '') + "，可以成为我的恋人吗";
+})()
 
 // No 按钮点击事件
-noButton.addEventListener("click", function() {
+noButton.addEventListener("click", function () {
     clickCount++;
 
     // 让 Yes 变大，每次放大 2 倍
@@ -52,7 +60,7 @@ noButton.addEventListener("click", function() {
 });
 
 // Yes 按钮点击后，进入表白成功页面
-yesButton.addEventListener("click", function() {
+yesButton.addEventListener("click", function () {
     document.body.innerHTML = `
         <div class="yes-screen">
             <h1 class="yes-text">!!!喜欢你!! ( >᎑<)♡︎ᐝ</h1>
