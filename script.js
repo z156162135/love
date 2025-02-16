@@ -17,7 +17,7 @@ const noTexts = [
 // 解码
 const params = new URLSearchParams(window.location.search);
 const LoveName = params.get('LoveName');
-const decodedText = atob(LoveName);
+const decodedText = decodeURIComponent(escape(atob(LoveName)));
 questionText.innerHTML = `${decodedText}可以成为我的恋人吗？`;
 
 // No 按钮点击事件
